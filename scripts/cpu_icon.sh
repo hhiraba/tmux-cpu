@@ -8,16 +8,19 @@ source "$CURRENT_DIR/helpers.sh"
 cpu_low_icon=""
 cpu_medium_icon=""
 cpu_high_icon=""
+cpu_error_icon=""
 
 cpu_low_default_icon="="
 cpu_medium_default_icon="≡"
 cpu_high_default_icon="≣"
+cpu_error_default_icon="≣"
 
 # icons are set as script global variables
 get_icon_settings() {
   cpu_low_icon=$(get_tmux_option "@cpu_low_icon" "$cpu_low_default_icon")
   cpu_medium_icon=$(get_tmux_option "@cpu_medium_icon" "$cpu_medium_default_icon")
   cpu_high_icon=$(get_tmux_option "@cpu_high_icon" "$cpu_high_default_icon")
+  cpu_error_icon=$(get_tmux_option "@cpu_error_icon" "$cpu_error_default_icon")
 }
 
 print_icon() {
@@ -29,6 +32,8 @@ print_icon() {
     echo "$cpu_medium_icon"
   elif [ $load_status == "high" ]; then
     echo "$cpu_high_icon"
+  elif [ $load_status == "error" ]; then
+    echo "$cpu_error_icon"
   fi
 }
 

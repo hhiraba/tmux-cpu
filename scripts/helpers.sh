@@ -41,7 +41,10 @@ fcomp() {
 
 load_status() {
   local percentage=$1
-  if fcomp 80 $percentage; then
+  local re='^[0-9]+([.][0-9]+)?$'
+  if ! [[ $percentage =~ $re ]] ; then
+    echo 'error'
+  elif fcomp 80 $percentage; then
     echo "high"
   elif fcomp 30 $percentage && fcomp $percentage 80; then
     echo "medium"

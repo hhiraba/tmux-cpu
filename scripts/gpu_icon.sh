@@ -8,16 +8,19 @@ source "$CURRENT_DIR/helpers.sh"
 gpu_low_icon=""
 gpu_medium_icon=""
 gpu_high_icon=""
+gpu_error_icon=""
 
 gpu_low_default_icon="="
 gpu_medium_default_icon="≡"
 gpu_high_default_icon="≣"
+gpu_error_default_icon="≣"
 
 # icons are set as script global variables
 get_icon_settings() {
   gpu_low_icon=$(get_tmux_option "@gpu_low_icon" "$gpu_low_default_icon")
   gpu_medium_icon=$(get_tmux_option "@gpu_medium_icon" "$gpu_medium_default_icon")
   gpu_high_icon=$(get_tmux_option "@gpu_high_icon" "$gpu_high_default_icon")
+  gpu_error_icon=$(get_tmux_option "@gpu_error_icon" "$gpu_error_default_icon")
 }
 
 print_icon() {
@@ -29,6 +32,8 @@ print_icon() {
     echo "$gpu_medium_icon"
   elif [ $gpu_load_status == "high" ]; then
     echo "$gpu_high_icon"
+  elif [ $gpu_load_status == "error" ]; then
+    echo "$gpu_error_icon"
   fi
 }
 

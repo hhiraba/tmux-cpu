@@ -7,15 +7,18 @@ source "$CURRENT_DIR/helpers.sh"
 gram_low_fg_color=""
 gram_medium_fg_color=""
 gram_high_fg_color=""
+gram_error_fg_color=""
 
 gram_low_default_fg_color="#[fg=green]"
 gram_medium_default_fg_color="#[fg=yellow]"
 gram_high_default_fg_color="#[fg=red]"
+gram_error_default_fg_color="#[fg=red]"
 
 get_fg_color_settings() {
   gram_low_fg_color=$(get_tmux_option "@gram_low_fg_color" "$gram_low_default_fg_color")
   gram_medium_fg_color=$(get_tmux_option "@gram_medium_fg_color" "$gram_medium_default_fg_color")
   gram_high_fg_color=$(get_tmux_option "@gram_high_fg_color" "$gram_high_default_fg_color")
+  gram_error_fg_color=$(get_tmux_option "@gram_error_fg_color" "$gram_error_default_fg_color")
 }
 
 print_fg_color() {
@@ -27,6 +30,8 @@ print_fg_color() {
     echo "$gram_medium_fg_color"
   elif [ $gram_load_status == "high" ]; then
     echo "$gram_high_fg_color"
+  elif [ $gram_load_status == "error" ]; then
+    echo "$gram_error_fg_color"
   fi
 }
 

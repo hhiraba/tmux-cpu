@@ -7,15 +7,18 @@ source "$CURRENT_DIR/helpers.sh"
 gpu_low_fg_color=""
 gpu_medium_fg_color=""
 gpu_high_fg_color=""
+gpu_error_fg_color=""
 
 gpu_low_default_fg_color="#[fg=green]"
 gpu_medium_default_fg_color="#[fg=yellow]"
 gpu_high_default_fg_color="#[fg=red]"
+gpu_error_default_fg_color="#[fg=red]"
 
 get_fg_color_settings() {
   gpu_low_fg_color=$(get_tmux_option "@gpu_low_fg_color" "$gpu_low_default_fg_color")
   gpu_medium_fg_color=$(get_tmux_option "@gpu_medium_fg_color" "$gpu_medium_default_fg_color")
   gpu_high_fg_color=$(get_tmux_option "@gpu_high_fg_color" "$gpu_high_default_fg_color")
+  gpu_error_fg_color=$(get_tmux_option "@gpu_error_fg_color" "$gpu_error_default_fg_color")
 }
 
 print_fg_color() {
@@ -27,6 +30,8 @@ print_fg_color() {
     echo "$gpu_medium_fg_color"
   elif [ $gpu_load_status == "high" ]; then
     echo "$gpu_high_fg_color"
+  elif [ $gpu_load_status == "error" ]; then
+    echo "$gpu_error_fg_color"
   fi
 }
 

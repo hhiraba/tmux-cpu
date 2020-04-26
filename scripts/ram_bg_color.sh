@@ -7,15 +7,18 @@ source "$CURRENT_DIR/helpers.sh"
 ram_low_bg_color=""
 ram_medium_bg_color=""
 ram_high_bg_color=""
+ram_error_bg_color=""
 
 ram_low_default_bg_color="#[bg=green]"
 ram_medium_default_bg_color="#[bg=yellow]"
 ram_high_default_bg_color="#[bg=red]"
+ram_error_default_bg_color="#[bg=red]"
 
 get_bg_color_settings() {
   ram_low_bg_color=$(get_tmux_option "@ram_low_bg_color" "$ram_low_default_bg_color")
   ram_medium_bg_color=$(get_tmux_option "@ram_medium_bg_color" "$ram_medium_default_bg_color")
   ram_high_bg_color=$(get_tmux_option "@ram_high_bg_color" "$ram_high_default_bg_color")
+  ram_error_bg_color=$(get_tmux_option "@ram_error_bg_color" "$ram_error_default_bg_color")
 }
 
 print_bg_color() {
@@ -27,6 +30,8 @@ print_bg_color() {
     echo "$ram_medium_bg_color"
   elif [ $ram_load_status == "high" ]; then
     echo "$ram_high_bg_color"
+  elif [ $ram_load_status == "error" ]; then
+    echo "$ram_error_bg_color"
   fi
 }
 

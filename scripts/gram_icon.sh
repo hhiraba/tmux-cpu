@@ -8,16 +8,19 @@ source "$CURRENT_DIR/helpers.sh"
 gram_low_icon=""
 gram_medium_icon=""
 gram_high_icon=""
+gram_error_icon=""
 
 gram_low_default_icon="="
 gram_medium_default_icon="≡"
 gram_high_default_icon="≣"
+gram_error_default_icon="≣"
 
 # icons are set as script global variables
 get_icon_settings() {
   gram_low_icon=$(get_tmux_option "@gram_low_icon" "$gram_low_default_icon")
   gram_medium_icon=$(get_tmux_option "@gram_medium_icon" "$gram_medium_default_icon")
   gram_high_icon=$(get_tmux_option "@gram_high_icon" "$gram_high_default_icon")
+  gram_error_icon=$(get_tmux_option "@gram_error_icon" "$gram_error_default_icon")
 }
 
 print_icon() {
@@ -29,6 +32,8 @@ print_icon() {
     echo "$gram_medium_icon"
   elif [ $gram_load_status == "high" ]; then
     echo "$gram_high_icon"
+  elif [ $gram_load_status == "error" ]; then
+    echo "$gram_error_icon"
   fi
 }
 

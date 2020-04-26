@@ -8,16 +8,19 @@ source "$CURRENT_DIR/helpers.sh"
 ram_low_icon=""
 ram_medium_icon=""
 ram_high_icon=""
+ram_error_icon=""
 
 ram_low_default_icon="="
 ram_medium_default_icon="≡"
 ram_high_default_icon="≣"
+ram_error_default_icon="≣"
 
 # icons are set as script global variables
 get_icon_settings() {
   ram_low_icon=$(get_tmux_option "@ram_low_icon" "$ram_low_default_icon")
   ram_medium_icon=$(get_tmux_option "@ram_medium_icon" "$ram_medium_default_icon")
   ram_high_icon=$(get_tmux_option "@ram_high_icon" "$ram_high_default_icon")
+  ram_error_icon=$(get_tmux_option "@ram_error_icon" "$ram_error_default_icon")
 }
 
 print_icon() {
@@ -29,6 +32,8 @@ print_icon() {
     echo "$ram_medium_icon"
   elif [ $ram_load_status == "high" ]; then
     echo "$ram_high_icon"
+  elif [ $ram_load_status == "error" ]; then
+    echo "$ram_error_icon"
   fi
 }
 
